@@ -1,0 +1,82 @@
+export EDITOR=nvim
+
+# alias
+alias ls='ls --color=auto'
+alias ll='ls -l --color=auto'
+alias bat='batcat'
+
+# path
+export PATH="$PATH:/opt/nvim/bin:$HOME/.local/bin"
+
+# rust
+. "$HOME/.cargo/env"
+
+# zinit
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+# plugins
+fpath+=~/.zsh/completions
+
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-syntax-highlighting
+
+autoload -Uz compinit && compinit
+
+zinit light Aloxaf/fzf-tab
+zinit light zsh-users/zsh-autosuggestions
+
+# tool init
+eval "$(starship init zsh)"
+eval "$(zoxide init zsh --cmd cd)"
+
+# keybinds
+bindkey '^H' backward-kill-word # Ctrl + Backspace
+bindkey '^[[3;5~' kill-word # Ctrl + Delete
+
+# Ctrl + Left/Right
+bindkey '^[[1;5C' forward-word
+bindkey '^[[1;5D' backward-word
+
+bindkey '^f' autosuggest-accept
+bindkey ' ' magic-space
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# history
+HISTSIZE=10000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTSDUP=erase
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_find_no_dups
+setopt hist_ignore_dups
+
+export FZF_DEFAULT_OPTS=" \
+--tmux center,80% \
+--color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8 \
+--color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC \
+--color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
+--color=selected-bg:#45475A \
+--color=border:#6C7086,label:#CDD6F4"
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+function f() {
+  fzf --bind 'enter:become(nvim {})' --preview 'batcat -n --color=always {}' --preview-window up,50%,border-bottom
+}
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
