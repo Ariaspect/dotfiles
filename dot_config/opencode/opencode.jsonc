@@ -1,0 +1,67 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "theme": "catppuccin",
+  "provider": {
+    "cliproxyapi": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "CLI Proxy API",
+      "options" : { "baseURL": "http://localhost:8317/v1" },
+      "models": {
+        "tab_flash_lite_preview": {
+          "id": "tab_flash_lite_preview",
+          "name": "Tab Flash Lite Preview"
+        },
+        "gemini-3-pro-preview": {
+          "id": "gemini-3-pro-preview",
+          "name": "Gemini 3 Pro Preview"
+        },
+        "gemini-3-flash-preview": {
+          "id": "gemini-3-flash-preview",
+          "name": "Gemini 3 Flash Preview"
+        },
+        "gemini-2.5-flash-lite": {
+          "id": "gemini-2.5-flash-lite",
+          "name": "Gemini 2.5 Flash Lite"
+        },
+        "gemini-claude-sonnet-4-5": {
+          "id": "gemini-claude-sonnet-4-5",
+          "name": "Gemini Claude Sonnet 4.5",
+        },
+        "gemini-3-pro-image-preview": {
+          "id": "gemini-3-pro-image-preview",
+          "name": "Gemini 3 Pro Image Preview"
+        },
+        "gpt-oss-120b-medium": {
+          "id": "gpt-oss-120b-medium",
+          "name": "GPT OSS 120B Medium"
+        },
+        "gemini-claude-sonnet-4-5-thinking": {
+          "id": "gemini-claude-sonnet-4-5-thinking",
+          "name": "Gemini Claude Sonnet 4.5 Thinking",
+          "variants": {
+            "minimal": { "reasoningEffort": "low", "textVerbosity": "low", "reasoningSummary": "auto" },
+            "low": { "reasoningEffort": "low", "textVerbosity": "medium", "reasoningSummary": "auto" },
+            "medium": { "reasoningEffort": "medium", "textVerbosity": "medium", "reasoningSummary": "auto" },
+            "high": { "reasoningEffort": "high", "textVerbosity": "low", "reasoningSummary": "auto" },
+            "max": { "reasoningEffort": "high", "textVerbosity": "high", "reasoningSummary": "auto" }
+          }
+        },
+        "gemini-2.5-flash": {
+          "id": "gemini-2.5-flash",
+          "name": "Gemini 2.5 Flash"
+        },
+        "gemini-claude-opus-4-5-thinking": {
+          "id": "gemini-claude-opus-4-5-thinking",
+          "name": "Gemini Claude Opus 4.5 Thinking",
+          "variants": {
+            "minimal": { "reasoningEffort": "low", "textVerbosity": "low", "reasoningSummary": "auto" },
+            "low": { "reasoningEffort": "low", "textVerbosity": "medium", "reasoningSummary": "auto" },
+            "medium": { "reasoningEffort": "medium", "textVerbosity": "medium", "reasoningSummary": "auto" },
+            "high": { "reasoningEffort": "high", "textVerbosity": "low", "reasoningSummary": "auto" },
+            "max": { "reasoningEffort": "high", "textVerbosity": "high", "reasoningSummary": "auto" }
+          }
+        }
+      },
+    }
+  }
+}
